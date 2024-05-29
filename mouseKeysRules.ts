@@ -81,7 +81,7 @@ const MOVE_FASTER: Conditions[] = [
 function mouseKey(
   conditions: Conditions[],
   key: KeyCode,
-  to: To[],
+  to: To[]
 ): Manipulator {
   return {
     conditions,

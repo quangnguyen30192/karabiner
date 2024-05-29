@@ -3,7 +3,7 @@ import { KarabinerRules, From } from "./types";
 function disableKeyMapOnProgram(
   description: string,
   appIdentifier: string,
-  from: From,
+  from: From
 ): KarabinerRules {
   return {
     description,
@@ -28,17 +28,17 @@ export function createDisableKeyMapOnPrograms(): KarabinerRules[] {
     disableKeyMapOnProgram(
       "Disable (Map to F11 which is harmless) Cmd-Q for Google Chrome due to frequently accidentally press",
       "^com\\.google\\.Chrome$",
-      { key_code: "w", modifiers: { mandatory: ["command", "left_shift"] } },
+      { key_code: "w", modifiers: { mandatory: ["command", "left_shift"] } }
     ),
     disableKeyMapOnProgram(
       "Disable (Map to F11 which is harmless) Cmd-Q for Google Chrome due to frequently accidentally press",
       "^com\\.google\\.Chrome$",
-      { key_code: "Q", modifiers: { mandatory: ["command"] } },
+      { key_code: "Q", modifiers: { mandatory: ["command"] } }
     ),
     disableKeyMapOnProgram(
       "Disable (Map to F11 which is harmless) Cmd-Q for Terminal Emulator due to frequently accidentally press",
       "^io\\.Alarcritty$",
-      { key_code: "Q", modifiers: { mandatory: ["command"] } },
+      { key_code: "Q", modifiers: { mandatory: ["command"] } }
     ),
   ];
 }

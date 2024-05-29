@@ -1,6 +1,4 @@
-import {
-  LayerCommand,
-} from "./types";
+import { LayerCommand } from "./types";
 
 /**
  * Utility function to create a LayerCommand from a tagged template literal

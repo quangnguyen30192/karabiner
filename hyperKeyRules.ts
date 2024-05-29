@@ -54,7 +54,7 @@ function generateSubLayerVariableName(key: KeyCode) {
 function createHyperSubLayer(
   sublayer_key: KeyCode,
   commands: HyperKeySublayer,
-  allSubLayerVariables: string[],
+  allSubLayerVariables: string[]
 ): Manipulator[] {
   const subLayerVariableName = generateSubLayerVariableName(sublayer_key);
 
@@ -93,7 +93,7 @@ function createHyperSubLayer(
       conditions: [
         ...allSubLayerVariables
           .filter(
-            (subLayerVariable) => subLayerVariable !== subLayerVariableName,
+            (subLayerVariable) => subLayerVariable !== subLayerVariableName
           )
           .map((subLayerVariable) => ({
             type: "variable_if" as const,
@@ -126,7 +126,7 @@ function createHyperSubLayer(
             value: 1,
           },
         ],
-      }),
+      })
     ),
   ];
 }
@@ -177,9 +177,9 @@ function createHyperSubLayers(subLayers: {
           manipulators: createHyperSubLayer(
             key as KeyCode,
             value,
-            allSubLayerVariables,
+            allSubLayerVariables
           ),
-        },
+        }
   );
 }
 
@@ -204,7 +204,6 @@ export function createHyperKeyRules(): KarabinerRules[] {
         f: app("Finder"),
         j: app("/Applications/Alacritty"),
         b: app("Messenger"),
-        s: open("x-apple.systempreferences:com.apple.preference"),
         p: app("IntelliJ IDEA Ultimate"),
         m: app("Webex"),
       },
@@ -254,16 +253,17 @@ export function createHyperKeyRules(): KarabinerRules[] {
             },
           ],
         },
-        b: {
-          description: "Window: Back",
-          to: [
-            {
-              key_code: "open_bracket",
-              modifiers: ["right_command"],
-            },
-          ],
-        },
-        // Note: No literal connection. Both f and n are already taken.
+
+        // moving window back and forth
+        // b: {
+        // description: "Window: Back",
+        // to: [
+        // {
+        // key_code: "open_bracket",
+        // modifiers: ["right_command"],
+        // },
+        // ],
+        // },
         // m: {
         // description: "Window: Forward",
         // to: [
@@ -273,124 +273,48 @@ export function createHyperKeyRules(): KarabinerRules[] {
         // },
         // ],
         // },
-        // d: {
-        // description: "Window: Next display",
-        // to: [
-        // {
-        // key_code: "right_arrow",
-        // modifiers: ["right_control", "right_option", "right_command"],
-        // },
-        // ],
-        // },
+
+        // require CatchMouse to be installed, so that moving mouse to other screen works
+        // and set ctrl + cmd + p/o to move the mouse
+        close_bracket: {
+          description: "Move mouse to the right screen",
+          to: [
+            {
+              key_code: "p",
+              modifiers: ["right_control", "right_command"],
+            },
+          ],
+        },
+        open_bracket: {
+          description: "Move mouse to the right screen",
+          to: [
+            {
+              key_code: "o",
+              modifiers: ["right_control", "right_command"],
+            },
+          ],
+        },
       },
 
       // s = "System"
       s: {
-        u: {
-          to: [
-            {
-              key_code: "volume_increment",
-            },
-          ],
-        },
-        j: {
-          to: [
-            {
-              key_code: "volume_decrement",
-            },
-          ],
-        },
-        i: {
-          to: [
-            {
-              key_code: "display_brightness_increment",
-            },
-          ],
-        },
-        // k: {
-        // to: [
-        // {
-        // key_code: "display_brightness_decrement",
-        // },
-        // ],
-        // },
-        // l: {
-        // to: [
-        // {
-        // key_code: "q",
-        // modifiers: ["right_control", "right_command"],
-        // },
-        // ],
-        // },
-        // p: {
-        // to: [
-        // {
-        // key_code: "play_or_pause",
-        // },
-        // ],
-        // },
-        // semicolon: {
-        // to: [
-        // {
-        // key_code: "fastforward",
-        // },
-        // ],
-        // },
-        // e: open(
-        // `raycast://extensions/thomas/elgato-key-light/toggle?launchType=background`
-        // ),
-        // "D"o not disturb toggle
-        // d: open(
-        // `raycast://extensions/yakitrak/do-not-disturb/toggle?launchType=background`
-        // ),
-        // "T"heme
-        // t: open(`raycast://extensions/raycast/system/toggle-system-appearance`),
-        // c: open("raycast://extensions/raycast/system/open-camera"),
-      },
+        // open preference
+        c: open("x-apple.systempreferences:com.apple.preference"),
 
-      // v = "moVe" which isn't "m" because we want it to be on the left hand
-      // so that hjkl work like they do in vim
-      v: {
-        h: {
-          to: [{ key_code: "left_arrow" }],
-        },
-        j: {
-          to: [{ key_code: "down_arrow" }],
-        },
-        k: {
-          to: [{ key_code: "up_arrow" }],
-        },
-        l: {
-          to: [{ key_code: "right_arrow" }],
-        },
-        // m: {
-        // to: [{ key_code: "f", modifiers: ["right_control"] }],
-        // },
-        // s: {
-        // to: [{ key_code: "j", modifiers: ["right_control"] }],
-        // },
-        // d: {
-        // to: [{ key_code: "d", modifiers: ["right_shift", "right_command"] }],
-        // },
+        // start recording screen using quicktime player
+        r: shell`osacript ~/.yadr/osascripts/record.scpt`,
+
+        // caPture the screen
         u: {
-          to: [{ key_code: "page_down" }],
-        },
-        i: {
-          to: [{ key_code: "page_up" }],
+          description: "Capture the screen",
+          to: [
+            {
+              key_code: "4",
+              modifiers: ["right_shift", "right_command"],
+            },
+          ],
         },
       },
-
-      // c: {
-      // p: {
-      // to: [{ key_code: "play_or_pause" }],
-      // },
-      // n: {
-      // to: [{ key_code: "fastforward" }],
-      // },
-      // b: {
-      // to: [{ key_code: "rewind" }],
-      // },
-      // },
 
       // iterm manipulation
       r: {
