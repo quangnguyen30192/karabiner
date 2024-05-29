@@ -1,3 +1,8 @@
+export interface LayerCommand {
+  to: To[];
+  description?: string;
+}
+
 export interface KarabinerRules {
   description?: string;
   manipulators?: Manipulator[];
@@ -18,7 +23,7 @@ export interface Parameters {
   "basic.simultaneous_threshold_milliseconds"?: number;
 }
 
-type Conditions =
+export type Conditions =
   | FrontMostApplicationCondition
   | DeviceCondition
   | KeybaordTypeCondition
@@ -190,6 +195,7 @@ export type KeyCode =
   | "o"
   | "p"
   | "q"
+  | "Q"
   | "r"
   | "s"
   | "t"

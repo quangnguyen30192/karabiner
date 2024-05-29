@@ -1,4 +1,4 @@
-# @mxstbr's Karabiner Elements configuration
+# A fork of @mxstbr's Karabiner Elements configuration
 
 If you like TypeScript and want your Karabiner configuration maintainable & type-safe, you probably want to use the custom configuration DSL / generator I created in `rules.ts` and `utils.ts`!
 
