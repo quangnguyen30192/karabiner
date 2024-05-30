@@ -14,6 +14,6 @@
     "build": "tsm karabiner.ts",
     "watch": "nodemon --exec yarn build -e ts",
     "prettier": "prettier **/*.ts --write",
-    "deploy": "cp -rf karabiner.json ~/.yadr/config/karabiner/karabiner.json"
+    "deploy": "cp -rf karabiner.json ~/.config/karabiner/karabiner.json"
   }
 }
